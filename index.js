@@ -1,24 +1,38 @@
-const http = require("http");
-const fs = require('fs');
+//npm i && npm i express -s
+// add in index html
+// <script src="node_modules/math-erfc/lib/index.js"></script>
+// <script src="script/script.js"></script>
 
-http.createServer(function (req, res) {
-    console.log(req.body)
-    if (req.url.startsWith("/public/")) {
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3001;
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+app.use('/', express.static(__dirname + '/'));
+app.listen(port);
 
-        var filePath = req.url.substr(1);
-        fs.readFile(filePath, function (error, data) {
+// const http = require("http");
+// const fs = require('fs');
 
-            if (error) {
-                f404(res);
-            } else {
-                res.setHeader("Content-Type", "text/html");
-                res.end(data);
-            }
-        })
-    } else {
-        f404(res);
-    }
-}).listen(3000);
+// http.createServer(function (req, res) {
+//     console.log(req.body)
+//     if (req.url.startsWith("/public/")) {
+
+//         var filePath = req.url.substr(1);
+//         fs.readFile(filePath, function (error, data) {
+
+//             if (error) {
+//                 f404(res);
+//             } else {
+//                 res.setHeader("Content-Type", "text/html");
+//                 res.end(data);
+//             }
+//         })
+//     } else {
+//         f404(res);
+//     }
+// }).listen(3000);
 
 // var 1
 
